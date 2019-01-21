@@ -56,6 +56,10 @@ public final class ImgQRCodeStyle implements IQRCodeStyle {
         this.eyeAdaptiveColorRate = eyeAdaptiveColorRate;
     }
 
+    /**
+     * 获取一个将特定图片改造为二维码的样式的 Builder
+     * @return 将特定图片改造为二维码的样式的 Builder
+     */
     public static ImgQRCodeStyleBuilder builder() {
         return new ImgQRCodeStyleBuilder();
     }

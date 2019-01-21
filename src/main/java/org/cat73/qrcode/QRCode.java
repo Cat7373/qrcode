@@ -5,6 +5,7 @@ import org.cat73.qrcode.builder.QRCodeBuilder;
 import org.cat73.qrcode.style.DefaultQRCodeStyle;
 import org.cat73.qrcode.style.IQRCodeStyle;
 import org.cat73.qrcode.style.ImgBlockQRCodeStyle;
+import org.cat73.qrcode.style.ImgQRCodeStyle;
 
 /**
  * 二维码工具类
@@ -22,7 +23,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 1<br>
      */
-    public static final IQRCodeStyle STYLE_01 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_01 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/01/11.png")
             .classpathImg(1, 1, "/imgs/01/12.png")
             .classpathImg(1, 1, "/imgs/01/13.png")
@@ -42,7 +43,7 @@ public class QRCode {
      * 内置的二维码样式 - 2<br>
      * <em>识别率较低</em><br>
      */
-    public static final IQRCodeStyle STYLE_02 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_02 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/02/11.png")
             .classpathImg(1, 1, "/imgs/02/12.png")
             .classpathImg(1, 1, "/imgs/02/13.png")
@@ -61,7 +62,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 3<br>
      */
-    public static final IQRCodeStyle STYLE_03 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_03 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/03/11.png")
             .classpathImg(1, 1, "/imgs/03/12.png")
             .classpathImg(1, 1, "/imgs/03/13.png")
@@ -80,7 +81,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 4<br>
      */
-    public static final IQRCodeStyle STYLE_04 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_04 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/04/11.png")
             .classpathImg(1, 1, "/imgs/04/12.png")
             .classpathImg(1, 1, "/imgs/04/13.png")
@@ -99,7 +100,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 5<br>
      */
-    public static final IQRCodeStyle STYLE_05 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_05 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/05/11.png")
             .classpathImg(1, 1, "/imgs/05/12.png")
             .classpathImg(1, 1, "/imgs/05/13.png")
@@ -118,7 +119,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 6<br>
      */
-    public static final IQRCodeStyle STYLE_06 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_06 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/06/11.png")
             .classpathImg(1, 1, "/imgs/06/12.png")
             .classpathImg(1, 1, "/imgs/06/13.png")
@@ -137,7 +138,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 7<br>
      */
-    public static final IQRCodeStyle STYLE_07 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_07 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/07/1_1_01.png")
             .classpathImg(1, 2, "/imgs/07/1_2_01.png")
             .classpathImg(1, 2, "/imgs/07/1_2_02.png")
@@ -154,7 +155,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 8<br>
      */
-    public static final IQRCodeStyle STYLE_08 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_08 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/08/1_1_01.png")
             .classpathImg(1, 3, "/imgs/08/1_3_01.png")
             .classpathImg(1, 4, "/imgs/08/1_4_01.png")
@@ -167,7 +168,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 9<br>
      */
-    public static final IQRCodeStyle STYLE_09 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_09 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/09/1_1_01.png")
             .classpathImg(1, 3, "/imgs/09/1_3_01.png")
             .classpathImg(1, 4, "/imgs/09/1_4_01.png")
@@ -180,7 +181,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 10<br>
      */
-    public static final IQRCodeStyle STYLE_10 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_10 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/10/1_1_01.png")
             .classpathImg(1, 3, "/imgs/10/1_3_01.png")
             .classpathImg(1, 4, "/imgs/10/1_4_01.png")
@@ -195,7 +196,7 @@ public class QRCode {
     /**
      * 内置的二维码样式 - 11<br>
      */
-    public static final IQRCodeStyle STYLE_11 = ImgBlockQRCodeStyle.builder()
+    public static final IQRCodeStyle STYLE_11 = QRCode.imgBlockStyleBuilder()
             .classpathImg(1, 1, "/imgs/11/11.png")
             .classpathImg(1, 1, "/imgs/11/12.png")
             .classpathImg(1, 1, "/imgs/11/13.png")
@@ -238,5 +239,22 @@ public class QRCode {
         return new QRCodeBuilder(content);
     }
 
+    /**
+     * 获取一个用图片填充 block 的二维码样式的 Builder
+     * @return 用图片填充 block 的二维码样式的 Builder 的实例
+     */
+    public static ImgBlockQRCodeStyle.ImgBlockQRCodeStyleBuilder imgBlockStyleBuilder() {
+        return ImgBlockQRCodeStyle.builder();
+    }
+
+    /**
+     * 获取一个将特定图片改造为二维码的样式的 Builder
+     * @return 将特定图片改造为二维码的样式的 Builder
+     */
+    public static ImgQRCodeStyle.ImgQRCodeStyleBuilder imgStyleBuilder() {
+        return ImgQRCodeStyle.builder();
+    }
+
     // TODO 解析二维码
+    // TODO 输出支持透明色
 }

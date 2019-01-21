@@ -63,8 +63,8 @@ public final class ImgBlockQRCodeStyle implements IQRCodeStyle {
     }
 
     /**
-     * 获取一个二维码样式的 Builder
-     * @return 二维码样式的 Builder 的实例
+     * 获取一个用图片填充 block 的二维码样式的 Builder
+     * @return 用图片填充 block 的二维码样式的 Builder 的实例
      */
     public static ImgBlockQRCodeStyleBuilder builder() {
         return new ImgBlockQRCodeStyleBuilder();
