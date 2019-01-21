@@ -199,32 +199,32 @@ public final class ImgQRCodeStyle implements IQRCodeStyle {
         gs.dispose();
 
         // 填充内容
-        var pointSize = (int) (blockSize * this.blockSizeRate);
+        int pointSize = (int) (blockSize * this.blockSizeRate);
         if (pointSize % 2 == 1) pointSize += 1;
         pointSize = Math.min(Math.max(pointSize, 2), blockSize);
-        var pointStart = (blockSize - pointSize) / 2;
+        int pointStart = (blockSize - pointSize) / 2;
 
         // 绘制内容
-        var end = blockWidth - borderBlock;
-        for (var y = borderBlock; y < end; y++) {
-            for (var x = borderBlock; x < end; x++) {
+        int end = blockWidth - borderBlock;
+        for (int y = borderBlock; y < end; y++) {
+            for (int x = borderBlock; x < end; x++) {
                 boolean foreground = arr[y][x];
-                var color = foreground ? foregroundColor : backgroundColor;
+                int color = foreground ? foregroundColor : backgroundColor;
                 this.drawRect(image, x * blockSize + pointStart, y * blockSize + pointStart, pointSize, pointSize, color, this.adaptiveColorRate);
             }
         }
 
         // 画三个码眼
         // 左上
-        for (var x = borderBlock + 6; x >= borderBlock; x--) {
-            for (var y = borderBlock + 6; y >= borderBlock; y--) {
+        for (int x = borderBlock + 6; x >= borderBlock; x--) {
+            for (int y = borderBlock + 6; y >= borderBlock; y--) {
                 this.drawRect(image, x * blockSize, y * blockSize, blockSize, blockSize, arr[x][y] ? foregroundColor : backgroundColor, this.eyeAdaptiveColorRate);
                 arr[x][y] = false;
             }
         }
         // 左下、右上
-        for (var a = blockWidth - borderBlock - 7; a < end; a++) { // 横轴或纵轴数字较大的那边的坐标
-            for (var b = borderBlock + 6; b >= borderBlock; b--) { // 与外循环的轴垂直的轴的坐标
+        for (int a = blockWidth - borderBlock - 7; a < end; a++) { // 横轴或纵轴数字较大的那边的坐标
+            for (int b = borderBlock + 6; b >= borderBlock; b--) { // 与外循环的轴垂直的轴的坐标
                 this.drawRect(image, a * blockSize, b * blockSize, blockSize, blockSize, arr[a][b] ? foregroundColor : backgroundColor, this.eyeAdaptiveColorRate);
                 this.drawRect(image, b * blockSize, a * blockSize, blockSize, blockSize, arr[b][a] ? foregroundColor : backgroundColor, this.eyeAdaptiveColorRate);
                 arr[a][b] = false; // 左下
@@ -253,9 +253,9 @@ public final class ImgQRCodeStyle implements IQRCodeStyle {
             int r = 0;
             int g = 0;
             int b = 0;
-            for (var posX = width + x - 1; posX >= x; posX--) {
-                for (var posY = height + y - 1; posY >= y; posY--) {
-                    var c = image.getRGB(posX, posY);
+            for (int posX = width + x - 1; posX >= x; posX--) {
+                for (int posY = height + y - 1; posY >= y; posY--) {
+                    int c = image.getRGB(posX, posY);
                     r += (c >> 16) & 0xFF;
                     g += (c >> 8) & 0xFF;
                     b += c & 0xFF;
@@ -276,8 +276,8 @@ public final class ImgQRCodeStyle implements IQRCodeStyle {
         }
 
         // 绘制区域
-        for (var posX = width + x - 1; posX >= x; posX--) {
-            for (var posY = height + y - 1; posY >= y; posY--) {
+        for (int posX = width + x - 1; posX >= x; posX--) {
+            for (int posY = height + y - 1; posY >= y; posY--) {
                 image.setRGB(posX, posY, newColor);
             }
         }

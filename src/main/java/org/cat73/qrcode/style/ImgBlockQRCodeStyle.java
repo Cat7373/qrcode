@@ -76,7 +76,7 @@ public final class ImgBlockQRCodeStyle implements IQRCodeStyle {
      * @return 合并后的样式
      */
     public static ImgBlockQRCodeStyle merge(ImgBlockQRCodeStyle... styles) {
-        var builder = ImgBlockQRCodeStyle.builder();
+        ImgBlockQRCodeStyleBuilder builder = ImgBlockQRCodeStyle.builder();
         for (ImgBlockQRCodeStyle style : styles) {
             style.eyeImgs.forEach(builder::eye);
             style.imgs.forEach(imgs -> imgs.imgs.forEach(img -> builder.img(imgs.width, imgs.height, img)));
@@ -112,33 +112,33 @@ public final class ImgBlockQRCodeStyle implements IQRCodeStyle {
         gs.drawImage(this.eyeImgs.get(rand.nextInt(this.eyeImgs.size())), borderBlock * blockSize, (blockWidth - borderBlock - 7) * blockSize, blockSize * 7, blockSize * 7, null);
         // 将三个码眼的位置设置为 false
         // 左上
-        for (var x = borderBlock + 6; x >= borderBlock; x--) {
-            for (var y = borderBlock + 6; y >= borderBlock; y--) {
+        for (int x = borderBlock + 6; x >= borderBlock; x--) {
+            for (int y = borderBlock + 6; y >= borderBlock; y--) {
                 arr[x][y] = false;
             }
         }
         // 左下、右上
-        for (var a = blockWidth - borderBlock - 7; a < blockWidth; a++) { // 横轴或纵轴数字较大的那边的坐标
-            for (var b = borderBlock + 6; b >= borderBlock; b--) { // 与外循环的轴垂直的轴的坐标
+        for (int a = blockWidth - borderBlock - 7; a < blockWidth; a++) { // 横轴或纵轴数字较大的那边的坐标
+            for (int b = borderBlock + 6; b >= borderBlock; b--) { // 与外循环的轴垂直的轴的坐标
                 arr[a][b] = false; // 左下
                 arr[b][a] = false; // 右上
             }
         }
 
         // 填充内容
-        for (var y = borderBlock; y < blockWidth; y++) {
-            for (var x = borderBlock; x < blockWidth; x++) {
+        for (int y = borderBlock; y < blockWidth; y++) {
+            for (int x = borderBlock; x < blockWidth; x++) {
                 if (!arr[y][x]) continue; // 不需要填充的点直接过
 
                 // 依次判断能否填充
-                for (var imgs : this.imgs) {
-                    if (this.canDraw(imgs.width, imgs.height, x, y, arr)) {
-                        var startX = x * blockSize;
-                        var startY = y * blockSize;
+                for (Imgs imgList : this.imgs) {
+                    if (this.canDraw(imgList.width, imgList.height, x, y, arr)) {
+                        int startX = x * blockSize;
+                        int startY = y * blockSize;
 
                         // 绘制图片
-                        var img = imgs.imgs.get(rand.nextInt(imgs.imgs.size()));
-                        gs.drawImage(img, startX, startY, imgs.width * blockSize, imgs.height * blockSize, null);
+                        BufferedImage img = imgList.imgs.get(rand.nextInt(imgList.imgs.size()));
+                        gs.drawImage(img, startX, startY, imgList.width * blockSize, imgList.height * blockSize, null);
 
                         // 跳出循环，不再继续尝试
                         break;
@@ -170,13 +170,13 @@ public final class ImgBlockQRCodeStyle implements IQRCodeStyle {
             return false;
         }
 
-        for (var yy = y; yy < height + y; yy++) {
-            for (var xx = x; xx < width + x; xx++) {
+        for (int yy = y; yy < height + y; yy++) {
+            for (int xx = x; xx < width + x; xx++) {
                 if (!arr[yy][xx]) return false;
             }
         }
-        for (var yy = y; yy < height + y; yy++) {
-            for (var xx = x; xx < width + x; xx++) {
+        for (int yy = y; yy < height + y; yy++) {
+            for (int xx = x; xx < width + x; xx++) {
                 arr[yy][xx] = false;
             }
         }
@@ -307,7 +307,7 @@ public final class ImgBlockQRCodeStyle implements IQRCodeStyle {
          */
         public ImgBlockQRCodeStyle build() {
             // 校验至少包含一张 1 * 1 个方块的图片
-            if (Optional.of(this.imgs).map(m -> m.get(1)).map(m -> m.get(1)).isEmpty()) {
+            if (!Optional.of(this.imgs).map(m -> m.get(1)).map(m -> m.get(1)).isPresent()) {
                 throw Lang.makeThrow("QRStyle 中必须包含至少一张 1 * 1 的图片");
             }
             if (this.eyeImgs.isEmpty()) {

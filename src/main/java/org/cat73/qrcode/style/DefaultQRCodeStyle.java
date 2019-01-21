@@ -17,10 +17,10 @@ public final class DefaultQRCodeStyle implements IQRCodeStyle {
         BufferedImage image = new BufferedImage(width * blockSize, width * blockSize, BufferedImage.TYPE_INT_RGB);
 
         // 填充内容
-        for (var y = 0; y < width; y++) {
-            for (var x = 0; x < width; x++) {
+        for (int y = 0; y < width; y++) {
+            for (int x = 0; x < width; x++) {
                 boolean foreground = arr[y][x];
-                var color = foreground ? foregroundColor : backgroundColor;
+                int color = foreground ? foregroundColor : backgroundColor;
                 this.drawRect(image, x * blockSize, y * blockSize, blockSize, blockSize, color);
             }
         }
@@ -39,8 +39,8 @@ public final class DefaultQRCodeStyle implements IQRCodeStyle {
      * @param color 绘制的颜色
      */
     private void drawRect(BufferedImage image, int x, int y, int width, int height, int color) {
-        for (var posX = x + width - 1; posX >= x; posX--) {
-            for (var posY = y + height - 1; posY >= y; posY--) {
+        for (int posX = x + width - 1; posX >= x; posX--) {
+            for (int posY = y + height - 1; posY >= y; posY--) {
                 image.setRGB(posX, posY, color);
             }
         }

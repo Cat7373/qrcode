@@ -332,7 +332,7 @@ public class QRCodeBuilder {
      */
     public boolean[][] toArray() {
         // 获取 BitMatrix
-        var matrix = this.toBitMatrix();
+        ByteMatrix matrix = this.toBitMatrix();
 
         // 宽高
         int width = matrix.getWidth();
@@ -353,13 +353,13 @@ public class QRCodeBuilder {
      */
     public String toStr() {
         // 获取填充数组
-        var arr = this.toArray();
+        boolean[][] arr = this.toArray();
 
         // 生成结果并返回
         int width = arr.length;
         StringBuilder sb = new StringBuilder();
         for (boolean[] xarr : arr) {
-            for (var x = 0; x < width; x++) {
+            for (int x = 0; x < width; x++) {
                 sb.append(xarr[x] ? this.backgroundStr : this.foregroundStr);
             }
             sb.append('\n');
@@ -373,7 +373,7 @@ public class QRCodeBuilder {
      */
     public BufferedImage toImg() {
         // 生成图片
-        var arr = this.toArray();
+        boolean[][] arr = this.toArray();
         BufferedImage img = this.style.toImg(arr, this.borderBlock, this.blockSize, this.foregroundColor, this.backgroundColor);
 
         // 如果有 Logo 则画 Logo
